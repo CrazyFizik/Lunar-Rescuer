@@ -10,13 +10,13 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
     {       
         private Pool<Projectile> _pool;        
         private Rigidbody2D _rb2d;
-        private Collider2D _collider;
+        public Collider2D _collider;
 
         private SpriteRenderer _spriteRenderer;
         private LineRenderer _trail;
 
         private SystemWeapon _weapon;
-        private GameObject _owner;
+        public GameObject _owner;
 
         [SerializeField] ExplosionFX _hitFx;
 
@@ -25,9 +25,10 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
         [SerializeField] float _lifetime = 10f;
         [SerializeField] float _delay = .1f;
 
-
         private Vector3 _lastVelocity;
         private Vector3 _lastPosition;
+
+        //public
 
         private void Awake()
         {
@@ -90,6 +91,7 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
             projectile._lastVelocity = projectile._rb2d.velocity;
             projectile._lastPosition = projectile._rb2d.position;
             projectile._damage = damageModifier * _damage;
+            projectile.transform.localScale = damageModifier * Vector3.one;
 
             return projectile;
         }
@@ -134,19 +136,38 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
             this.CollisionDamage(collisionData);
         }
 
+        private void OnTriggerEnter2D(Collision2D collisionData)
+        {
+            this.CollisionDamage(collisionData);
+        }
 
+        [System.Obsolete("Need adapt for tiles")]
         private void CollisionDamage(Collision2D collisionData)
         {
             if (!this.GetPool().IsSpawned()) return;
             if (collisionData.contacts == null) return;
-            if (collisionData.contactCount < 1) return;            
+            if (collisionData.contactCount < 1) return;   
+            
+            if (_owner == collisionData.gameObject)
+            {
+                Physics2D.IgnoreCollision(_collider, collisionData.collider);
+                return;
+            }
+
+            var bullet = collisionData.gameObject.GetComponent<Projectile>();
+            if (bullet != null)
+            {
+                if (bullet._owner == _owner)
+                {
+                    Physics2D.IgnoreCollision(_collider, collisionData.collider);
+                    _collider.enabled = false;
+                    return;
+                }
+            }
 
             var point = collisionData.contacts[0].point;
             var normal = collisionData.contacts[0].normal;
             var angle = Vector3.Angle(normal, -this.transform.forward);
-
-            //if (collisionData.collider.gameObject == _owner) Physics2D.IgnoreCollision(this._collider, collisionData.collider);
-            //if (_delay > 0f) Physics2D.IgnoreCollision(this._collider, collisionData.collider);
 
             IDamageReciver damagable = null;
             if (collisionData.rigidbody != null)

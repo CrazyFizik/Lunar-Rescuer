@@ -41,14 +41,6 @@ namespace Assets.Moonshot.Scripts.Austronaut
             _rb2d.MovePosition((Vector2)transform.position + _speed * _direction * Time.deltaTime);
         }
 
-        public void Flight(Vector2 movement)
-        {
-            _direction = movement;
-            Turn(movement.x);
-            _animator.Play("Move");
-            _rb2d.MovePosition((Vector2)transform.position + _speed * _direction * Time.deltaTime);
-        }
-
         public void Turn(float direction)
         {
             if (direction * transform.localScale.x >= 0) return;
@@ -92,7 +84,7 @@ namespace Assets.Moonshot.Scripts.Austronaut
             else
             {
                 r.y = 0f;
-                r.x = 1f;
+                r.x = Mathf.Clamp(r.x, -1, 1);
                 Move(r);
             }
         }
