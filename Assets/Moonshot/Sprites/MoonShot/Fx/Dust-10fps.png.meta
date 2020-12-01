@@ -1,0 +1,446 @@
+fileFormatVersion: 2
+guid: 613fb3e0f2e46af4790667a21eb3dee0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4859267313527006655
+    second: Dust-10fps_0
+  - first:
+      213: 3609332587217561273
+    second: Dust-10fps_1
+  - first:
+      213: -8641959719657273639
+    second: Dust-10fps_2
+  - first:
+      213: -8751067381541208542
+    second: Dust-10fps_3
+  - first:
+      213: -1607585405801801382
+    second: Dust-10fps_4
+  - first:
+      213: 7495846946082598963
+    second: Dust-10fps_5
+  - first:
+      213: 2079545121771549355
+    second: Dust-10fps_6
+  - first:
+      213: 8622951950686768358
+    second: Dust-10fps_7
+  - first:
+      213: -1820647859465095902
+    second: Dust-10fps_8
+  - first:
+      213: 713310517260700824
+    second: Dust-10fps_9
+  - first:
+      213: 7953874845927803810
+    second: Dust-10fps_10
+  - first:
+      213: 8015221762911530860
+    second: Dust-10fps_11
+  - first:
+      213: 956492547369480213
+    second: Dust-10fps_12
+  - first:
+      213: -5152504273594295796
+    second: Dust-10fps_13
+  - first:
+      213: 1287671768615772325
+    second: Dust-10fps_14
+  - first:
+      213: -2254902731872858663
+    second: Dust-10fps_15
+  - first:
+      213: -6839590024133181298
+    second: Dust-10fps_16
+  - first:
+      213: 5272694999677570945
+    second: Dust-10fps_17
+  - first:
+      213: 6922815350814083384
+    second: Dust-10fps_18
+  - first:
+      213: 2967276628612939909
+    second: Dust-10fps_19
+  - first:
+      213: 383303699484215033
+    second: Dust-10fps_20
+  - first:
+      213: 3608429091542427183
+    second: Dust-10fps_21
+  - first:
+      213: 3787375976449817918
+    second: Dust-10fps_22
+  - first:
+      213: 4092028628303266379
+    second: Dust-10fps_23
+  - first:
+      213: -5268676947684990521
+    second: Dust-10fps_24
+  - first:
+      213: -6423948978202046295
+    second: Dust-10fps_25
+  - first:
+      213: 8099965620951836321
+    second: Dust-10fps_26
+  - first:
+      213: 1543540728574748470
+    second: Dust-10fps_27
+  - first:
+      213: -6676255175055502313
+    second: Dust-10fps_28
+  - first:
+      213: -7256645814418551965
+    second: Dust-10fps_29
+  - first:
+      213: 2013278491825230966
+    second: Dust-10fps_30
+  - first:
+      213: 3837792944132200219
+    second: Dust-10fps_31
+  - first:
+      213: -9019356213360564296
+    second: Dust-10fps_32
+  - first:
+      213: -7349935854275974385
+    second: Dust-10fps_33
+  - first:
+      213: 4146159821429673731
+    second: Dust-10fps_34
+  - first:
+      213: -6950970908541057732
+    second: Dust-10fps_35
+  - first:
+      213: 6404839463774661297
+    second: Dust-10fps_36
+  - first:
+      213: -2066012777549344640
+    second: Dust-10fps_37
+  - first:
+      213: 8896972681677353054
+    second: Dust-10fps_38
+  - first:
+      213: -4683155810204337890
+    second: Dust-10fps_39
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Dust-10fps_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb5a17b40e59f6340800000000000000
+      internalID: 4859267313527006655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dust-10fps_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b628517ddce61230800000000000000
+      internalID: 3609332587217561273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dust-10fps_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d6089a0c67911880800000000000000
+      internalID: -8641959719657273639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dust-10fps_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22e7ab5e496fd8680800000000000000
+      internalID: -8751067381541208542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dust-10fps_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a59d41d3795b0b9e0800000000000000
+      internalID: -1607585405801801382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dust-10fps_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33033ff2519960860800000000000000
+      internalID: 7495846946082598963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dust-10fps_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba2f69535470cdc10800000000000000
+      internalID: 2079545121771549355
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dust-10fps_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ec42ffdc11eaa770800000000000000
+      internalID: 8622951950686768358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dust-10fps_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 225f1830b62cbb6e0800000000000000
+      internalID: -1820647859465095902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dust-10fps_9
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89ccfdbd22036e900800000000000000
+      internalID: 713310517260700824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
