@@ -41,6 +41,7 @@ namespace Assets.Moonshot.Scripts.Austronaut
             //_rb2d.MovePosition((Vector2)transform.position + _speed * _direction * Time.deltaTime);
 
             var targetSpeed = _speed * _direction - _rb2d.velocity;
+            targetSpeed.y = 0;
             _rb2d.AddForce(targetSpeed * _rb2d.mass);
         }
 
