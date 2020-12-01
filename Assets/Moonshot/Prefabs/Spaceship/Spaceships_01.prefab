@@ -223,7 +223,7 @@ MonoBehaviour:
     _offlineRecoverTime: 2
     _offlineExtraTime: 1
     _timer: 0
-  _twr: 5
+  _twr: 6
   _fuelConsuption: 0.5
   _damagedTwr: 4
   _damagedFuelConsuption: 1

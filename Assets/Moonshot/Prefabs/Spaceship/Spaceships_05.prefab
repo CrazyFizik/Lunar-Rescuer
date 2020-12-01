@@ -192,9 +192,9 @@ MonoBehaviour:
     _offlineRecoverTime: 1
     _offlineExtraTime: 0.5
     _timer: 0
-  _twr: 3
+  _twr: 4
   _fuelConsuption: 1
-  _damagedTwr: 2
+  _damagedTwr: 3
   _damagedFuelConsuption: 2
 --- !u!114 &8209139639126766820
 MonoBehaviour:
@@ -466,8 +466,8 @@ MonoBehaviour:
     _offlineRecoverTime: 8
     _offlineExtraTime: 4
     _timer: 0
-  _turnRate: 180
-  _turnRateDamaged: 120
+  _turnRate: 270
+  _turnRateDamaged: 180
 --- !u!1 &8209139639835360988
 GameObject:
   m_ObjectHideFlags: 0

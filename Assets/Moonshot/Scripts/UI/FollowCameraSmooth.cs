@@ -23,7 +23,7 @@ namespace Assets.Moonshot.Scripts.UI
 
         private void FixedUpdate()
         {
-
+            Follow();
         }
 
         private void Update()
@@ -33,7 +33,7 @@ namespace Assets.Moonshot.Scripts.UI
 
         private void LateUpdate()
         {
-            Follow();
+            //Follow();
         }
 
 
