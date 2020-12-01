@@ -38,7 +38,10 @@ namespace Assets.Moonshot.Scripts.Austronaut
             _direction = movement;
             Turn(movement.x);
             _animator.Play("Move");
-            _rb2d.MovePosition((Vector2)transform.position + _speed * _direction * Time.deltaTime);
+            //_rb2d.MovePosition((Vector2)transform.position + _speed * _direction * Time.deltaTime);
+
+            var targetSpeed = _speed * _direction - _rb2d.velocity;
+            _rb2d.AddForce(targetSpeed * _rb2d.mass);
         }
 
         public void Turn(float direction)

@@ -89,7 +89,7 @@ namespace Assets.Moonshot.Scripts.Controllers
             _volume.profile.TryGetSettings(out _bloom);
 
             _ingameGUI = GetComponentInChildren<GUIManager>();
-            _ingameGUI.enabled = false;
+            //_ingameGUI.enabled = false;
 
             _cameraFollowing = GetComponentInChildren<FollowCameraSmooth>();
             _cameraFollowing.enabled = false;
