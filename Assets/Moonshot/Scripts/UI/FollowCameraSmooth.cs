@@ -23,7 +23,7 @@ namespace Assets.Moonshot.Scripts.UI
 
         private void FixedUpdate()
         {
-            Follow();
+            FixedFollow();
         }
 
         private void Update()
@@ -44,6 +44,16 @@ namespace Assets.Moonshot.Scripts.UI
             Vector3 position = target.transform.position;
             Vector2 smoothedPosition = Vector2.Lerp(transform.position, position + offset, smoothSpeed);
             transform.position = new Vector3(smoothedPosition.x, smoothedPosition.y, position.z + offset.z);
+        }
+
+        void FixedFollow()
+        {
+            if (target == null) return;
+            GetComponent<Rigidbody2D>().MovePosition(target.GetComponent<Rigidbody2D>().position);
+            //offset.z = transform.position.z;
+            //Vector3 position = target.transform.position;
+            //Vector2 smoothedPosition = Vector2.Lerp(transform.position, position + offset, smoothSpeed);
+            //transform.position = new Vector3(smoothedPosition.x, smoothedPosition.y, position.z + offset.z);
         }
 
         float _interp = 5f;

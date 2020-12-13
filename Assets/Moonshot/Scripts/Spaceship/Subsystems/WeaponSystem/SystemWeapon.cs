@@ -89,17 +89,33 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
         // Update is called once per frame
         void Update()
         {
-            if (_timer > 0)
-            {
-                _timer -= Time.deltaTime;
-            }
+            //var position = (Vector2)_muzzlePoint.position;
+            //_inheritedVelocity = (position - _inheritedPosition) / Time.deltaTime;
+            //_inheritedPosition = position;
+
+            //if (_timer > 0)
+            //{
+            //    _timer -= Time.deltaTime;
+            //}
+        }
+
+        void LateUpdate()
+        {
+            //var position = (Vector2)_muzzlePoint.position;
+            //_inheritedVelocity = (position - _inheritedPosition) / Time.deltaTime;
+            //_inheritedPosition = position;
         }
 
         void FixedUpdate()
         {
-            var position = (Vector2)_muzzlePoint.position;
-            _inheritedVelocity = (position - _inheritedPosition) / Time.fixedDeltaTime;
-            _inheritedPosition = position;
+            //var position = (Vector2)_muzzlePoint.position;
+            //_inheritedVelocity = (position - _inheritedPosition) / Time.fixedDeltaTime;
+            //_inheritedPosition = position;
+
+            if (_timer > 0)
+            {
+                _timer -= Time.fixedDeltaTime;
+            }
         }
 
         public override void Init()
@@ -174,8 +190,8 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
         private Vector2 GetDirection()
         {
             var direction = _transform.right * _range;
-            direction.x += Random.Range(-_accuracy, _accuracy);
-            direction.y += Random.Range(-_accuracy, _accuracy);
+            //direction.x += Random.Range(-_accuracy, _accuracy);
+            //direction.y += Random.Range(-_accuracy, _accuracy);
 
             return direction;
         }
@@ -186,8 +202,9 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
             if (r < 1f) return;
 
             var rotation = Quaternion.FromToRotation(Vector2.right, direction);
-            var position = _muzzlePoint.transform.position;
-            var p = _projectile.Spawn(position, rotation, _inheritedVelocity, _speedModifier, _damageModifier);
+            _inheritedPosition = _muzzlePoint.transform.position;
+            _inheritedVelocity = Ship.Body.GetPointVelocity(_muzzlePoint.transform.position);
+            var p = _projectile.Spawn((Vector2)_muzzlePoint.position, rotation, _inheritedVelocity, _speedModifier, _damageModifier);
             p._owner = Ship.gameObject;
             var colliders = Ship.Body.GetComponentsInChildren<Collider2D>();
             foreach (var collider in colliders)

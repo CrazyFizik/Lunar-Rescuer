@@ -149,25 +149,31 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
             Status.Initialize(this);
         }
 
+        public float _acceleration = 0f;
+
         public void SetRotation(float rotation)
         {
-            var dt = Time.fixedDeltaTime;
-            var scale = 2f * MaxAngularSpeed * dt;
-            var linearRotation = Mathf.Clamp(rotation / scale, -1f, 1f);            
-            var targetAngularSpeed = linearRotation * MaxAngularSpeed;
-            var deltaAngularSpeed = targetAngularSpeed - AngularSpeed;  
+            var maxAngularAcceleration = MaxAngularSpeed * 50f;// * Mathf.PI * 2f;            
             
-            var acceleration = Mathf.Clamp(deltaAngularSpeed, -MaxAngularSpeed, MaxAngularSpeed)/dt;
-            if (Status.GetCondition(eSystemState.OFFLINE) || Status.GetCondition(eSystemState.INVALID))
+            var x = MaxAngularSpeed * Time.fixedDeltaTime;
+            x = rotation / x;
+            x = Mathf.Clamp(x, -1f, 1f); 
+            
+            var targetAngularSpeed = x * MaxAngularSpeed;
+            var deltaAngularSpeed = targetAngularSpeed - AngularSpeed;
+
+            var acceleration = 0f;        
+            if (! (Status.GetCondition(eSystemState.OFFLINE) || Status.GetCondition(eSystemState.INVALID)) )
             {
-                acceleration = 0f;
-            }
-            var maxAngularAcceleration = MaxAngularSpeed / dt;
+                acceleration = Mathf.Clamp(deltaAngularSpeed, -MaxAngularSpeed, MaxAngularSpeed);
+                acceleration /= Time.fixedDeltaTime;
+                acceleration = Mathf.Clamp(acceleration, -maxAngularAcceleration, maxAngularAcceleration);
+            }         
             var throttle = acceleration / maxAngularAcceleration;
             acceleration = acceleration * FuelSystem.GetFuelFlowRatio(FuelConsuption * Mathf.Abs(throttle) * Time.fixedDeltaTime);
-
             var torque = acceleration * Mathf.Deg2Rad * Inertia;
             SetTorque(torque);
+            if (Mathf.Abs(acceleration) > _acceleration) _acceleration = acceleration;
         }
 
         public void SetTorque(float torque)

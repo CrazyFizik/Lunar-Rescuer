@@ -136,10 +136,10 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
             this.CollisionDamage(collisionData);
         }
 
-        private void OnTriggerEnter2D(Collision2D collisionData)
-        {
-            this.CollisionDamage(collisionData);
-        }
+        //private void OnTriggerEnter2D(Collision2D collisionData)
+        //{
+        //    this.CollisionDamage(collisionData);
+        //}
 
         [System.Obsolete("Need adapt for tiles")]
         private void CollisionDamage(Collision2D collisionData)

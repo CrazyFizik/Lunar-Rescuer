@@ -66,7 +66,7 @@ Transform:
   m_GameObject: {fileID: 7719610144481798409}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_Children:
   - {fileID: 7719610145407431439}
   - {fileID: 7719610144348654164}
@@ -223,7 +223,7 @@ MonoBehaviour:
     _offlineRecoverTime: 2
     _offlineExtraTime: 1
     _timer: 0
-  _twr: 6
+  _twr: 8
   _fuelConsuption: 0.5
   _damagedTwr: 4
   _damagedFuelConsuption: 1
@@ -251,10 +251,11 @@ MonoBehaviour:
     _offlineRecoverTime: 2
     _offlineExtraTime: 1
     _timer: 0
-  _angularSpeed: 360
+  _angularSpeed: 720
   _fuelConsuption: 0.5
-  _damagedAngularSpeed: 270
+  _damagedAngularSpeed: 360
   _damagedFuelConsuption: 1
+  _acceleration: 0
 --- !u!114 &7719610144481798405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,7 +409,7 @@ MonoBehaviour:
   _throttle: 0
   _centerOfMass: {x: 0, y: 0, z: 0}
   _forwardVector: {x: 1.0000002, y: -0.00000023841858, z: 0}
-  _relativePosition: {x: -0.86500025, y: 0, z: 0}
+  _relativePosition: {x: -0.6487501, y: 0, z: 0}
   _torquePriority: 0
   _force: {x: 0.00000011920929, y: 1.0000001, z: -0}
   _torque: {x: 0, y: 0, z: 0}

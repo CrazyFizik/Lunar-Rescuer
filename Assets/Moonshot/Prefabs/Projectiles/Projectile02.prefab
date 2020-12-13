@@ -154,7 +154,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 1607774251485464736}
   m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 1
+  m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 0.2
   m_LinearDrag: 0
@@ -193,6 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd6ec65d54c437a4eb1a5c094f3ce1c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collider: {fileID: 0}
   _owner: {fileID: 0}
   _hitFx: {fileID: 7801632454315067485, guid: 38d68bf5727d7bd449877210849ef6bb, type: 3}
   _damage: 15

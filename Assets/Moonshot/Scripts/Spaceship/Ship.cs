@@ -137,13 +137,13 @@ namespace Assets.Moonshot.Scripts.Spaceship
 
             DamageControl.Update(Time.deltaTime);
 
-            if (LifeSupport.Status.GetCondition(eSystemState.OFFLINE) || LifeSupport.Status.GetCondition(eSystemState.INVALID))
-            {
-                Controls.attack = false;
-                Controls.special = false;
-            }
+            //if (LifeSupport.Status.GetCondition(eSystemState.OFFLINE) || LifeSupport.Status.GetCondition(eSystemState.INVALID))
+            //{
+            //    Controls.attack = false;
+            //    Controls.special = false;
+            //}
             
-            TacticalComputer.SetInput(Controls.attack, Controls.special, null);
+            //TacticalComputer.SetInput(Controls.attack, Controls.special, null);
         }
 
 
@@ -158,6 +158,14 @@ namespace Assets.Moonshot.Scripts.Spaceship
             }
 
             FlightComputer.SetInput(Controls.movement.x, Controls.turn);
+
+            if (LifeSupport.Status.GetCondition(eSystemState.OFFLINE) || LifeSupport.Status.GetCondition(eSystemState.INVALID))
+            {
+                Controls.attack = false;
+                Controls.special = false;
+            }
+
+            TacticalComputer.SetInput(Controls.attack, Controls.special, null);
         }
 
         private void Floating(float size)
