@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System;
 
-namespace Utils.Extensions
+namespace Utils
 {
     public class Pool<T> where T : MonoBehaviour, Pool<T>.IPoolOwner
     {
@@ -82,7 +82,7 @@ namespace Utils.Extensions
         public void Despawn()
         {
             if (this._prefab == null)
-                throw new InvalidOperationException("Trying to call Despawn() but m_prefab is null");
+                throw new InvalidOperationException("Trying to call Despawn() but _prefab is null");
             if (this._spawnID == 0UL)
             {
                 Debug.LogError((object)"Trying to call Despawn() but spawnID is already 0");

@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Utils;
-using Utils.Extensions;
 using UnityEngine.UI;
 
 namespace Assets.Moonshot.Scripts.UI

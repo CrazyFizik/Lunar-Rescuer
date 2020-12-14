@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using Utils;
-using Utils.Extensions;
 using UnityEngine.UI;
 
 namespace Assets.Moonshot.Scripts.UI
@@ -45,14 +44,14 @@ namespace Assets.Moonshot.Scripts.UI
 
         public void FillBar(float currentValue, float minValue, float maxValue)
         {
-            var targetFill = Math.Remap(currentValue, minValue, maxValue, _startValue, _endValue);
+            var targetFill = MathHelper.Remap(currentValue, minValue, maxValue, _startValue, _endValue);
             _image.fillAmount = targetFill;
 
         }
 
         public void TileBar(float currentValue, float minValue, float maxValue)
         {
-            var targetFill = Math.Remap(currentValue, minValue, maxValue, _startValue, _endValue);
+            var targetFill = MathHelper.Remap(currentValue, minValue, maxValue, _startValue, _endValue);
             var size = Vector3.one;
             switch (_barDirection)
             {

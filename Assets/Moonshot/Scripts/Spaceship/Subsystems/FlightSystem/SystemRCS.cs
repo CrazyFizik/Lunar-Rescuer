@@ -76,12 +76,12 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
             }
         }
 
-        public override Ship Ship 
+        public override Ship Ship
         {
             get
             {
                 return _ship;
-            } 
+            }
             set
             {
                 _ship = value;
@@ -152,26 +152,25 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
         public void SetRotation(float rotation)
         {
             var torque = 0f;
-            if (!(Status.GetCondition(eSystemState.OFFLINE) || Status.GetCondition(eSystemState.INVALID)))
+            var isOnline = !(Status.GetCondition(eSystemState.OFFLINE) || Status.GetCondition(eSystemState.INVALID));
+            if (isOnline)
             {
                 var maxAcceleration = 0f;
                 var steer = 0f;
 
-                maxAcceleration = Mathf.Log(120f) * MaxAngularSpeed; // 120 Hz
+                maxAcceleration = Mathf.Exp(2) * MaxAngularSpeed;
+                //maxAcceleration = Mathf.Log(120f) * MaxAngularSpeed; // 120 Hz
                 //maxAcceleration = Mathf.Sqrt(1f / Time.fixedDeltaTime) * MaxAngularSpeed;
-                //maxAcceleration = 20f * Mathf.Log10(0.05f / Time.fixedDeltaTime) * MaxAngularSpeed;
+                //maxAcceleration = 20f * Mathf.Log10(1f / Time.fixedDeltaTime / 20f) * MaxAngularSpeed;
 
-                if (Mathf.Abs(rotation) > 2f * MaxAngularSpeed * Time.fixedDeltaTime)
-                {
-                    //steer = rotation / (2f * maxAcceleration * Time.fixedDeltaTime); // not use
-                    //steer = rotation / 90f; // simple diviede on quarter                    
-                    steer = Mathf.Cos((90f - Mathf.Clamp(rotation, -90f, 90f)) * Mathf.Deg2Rad); // lateral component of directional vector
-                }
-                else // for precision rotation
-                {
-                    steer = rotation / MaxAngularSpeed;
-                }
-                steer = Mathf.Clamp(steer, -1f, 1f);
+                //steer = rotation / (maxAcceleration * Time.fixedDeltaTime); // 
+                //steer = rotation / 90f; // simple diviede on quarter                    
+                //steer = Mathf.Cos((90f - Mathf.Clamp(rotation, -90f, 90f)) * Mathf.Deg2Rad); // lateral component of directional vector
+                //steer = rotation / Time.fixedDeltaTime; steer = steer / MaxAngularSpeed; // overshooting
+                ////steer = Mathf.Clamp(steer, -1f, 1f);
+
+                steer = rotation / MaxAngularSpeed;
+                steer = Mathf.Sign(steer) * Utils.MathHelper.SmootherStep(0f, 90f/MaxAngularSpeed, Mathf.Abs(steer));
 
                 var targetVelocity = steer * MaxAngularSpeed;
                 torque = GetTorqueByTargetSpeed(targetVelocity, maxAcceleration);
@@ -181,7 +180,7 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
         }
 
         float GetTorqueByTargetSpeed(float targetVelocity, float maxAcceleration)
-        {            
+        {
             var deltaVelocity = targetVelocity - AngularVelocity;
             var acceleration = deltaVelocity / Time.fixedDeltaTime;
             acceleration = Mathf.Clamp(acceleration, -maxAcceleration, maxAcceleration);
@@ -197,7 +196,7 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
             var damp = maxAcceleration / (Mathf.Deg2Rad * MaxAngularSpeed);
             var acceleration = maxAcceleration * x - (Mathf.Deg2Rad * AngularVelocity) * damp;
             acceleration = Mathf.Clamp(acceleration, -maxAcceleration, maxAcceleration);
-            
+
             var throttle = acceleration / maxAcceleration;
             acceleration = acceleration * FuelSystem.GetFuelFlowRatio(FuelConsuption * Mathf.Abs(throttle) * Time.fixedDeltaTime);
             var torque = acceleration * Inertia;

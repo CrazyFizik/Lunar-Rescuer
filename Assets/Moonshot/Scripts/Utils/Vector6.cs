@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Utils.Extensions
+namespace Utils
 {
     [System.Serializable]
     public class Vector6

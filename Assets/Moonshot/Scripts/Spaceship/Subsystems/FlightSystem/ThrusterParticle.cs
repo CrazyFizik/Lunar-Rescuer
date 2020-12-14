@@ -46,7 +46,7 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
 
             if (throttle > 0f)
             {
-                _currentThrottle = Utils.Utils.SmootherStep(_edge0, _edge1, throttle);
+                _currentThrottle = Utils.MathHelper.SmootherStep(_edge0, _edge1, throttle);
                 var scale = _currentThrottle * _maxScale * Random.Range(1.0f - _flicker, 1.0f + _flicker);
 
                 //_particleSystem.main = _rateOverSpeed * Mathf.Clamp01(scale.z);

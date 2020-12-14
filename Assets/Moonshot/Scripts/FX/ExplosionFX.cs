@@ -1,6 +1,5 @@
 using UnityEngine;
 using Utils;
-using Utils.Extensions;
 using System.Collections;
 
 namespace Assets.Moonshot.Scripts.FX
