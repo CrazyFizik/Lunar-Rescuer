@@ -48,7 +48,7 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
             }
         }
 
-        public float AngularSpeed
+        public float AngularVelocity
         {
             get
             {
@@ -149,31 +149,59 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
             Status.Initialize(this);
         }
 
-        public float _acceleration = 0f;
-
         public void SetRotation(float rotation)
         {
-            var maxAngularAcceleration = MaxAngularSpeed * 50f;// * Mathf.PI * 2f;            
-            
-            var x = MaxAngularSpeed * Time.fixedDeltaTime;
-            x = rotation / x;
-            x = Mathf.Clamp(x, -1f, 1f); 
-            
-            var targetAngularSpeed = x * MaxAngularSpeed;
-            var deltaAngularSpeed = targetAngularSpeed - AngularSpeed;
-
-            var acceleration = 0f;        
-            if (! (Status.GetCondition(eSystemState.OFFLINE) || Status.GetCondition(eSystemState.INVALID)) )
+            var torque = 0f;
+            if (!(Status.GetCondition(eSystemState.OFFLINE) || Status.GetCondition(eSystemState.INVALID)))
             {
-                acceleration = Mathf.Clamp(deltaAngularSpeed, -MaxAngularSpeed, MaxAngularSpeed);
-                acceleration /= Time.fixedDeltaTime;
-                acceleration = Mathf.Clamp(acceleration, -maxAngularAcceleration, maxAngularAcceleration);
-            }         
-            var throttle = acceleration / maxAngularAcceleration;
+                var maxAcceleration = 0f;
+                var steer = 0f;
+
+                maxAcceleration = Mathf.Log(120f) * MaxAngularSpeed; // 120 Hz
+                //maxAcceleration = Mathf.Sqrt(1f / Time.fixedDeltaTime) * MaxAngularSpeed;
+                //maxAcceleration = 20f * Mathf.Log10(0.05f / Time.fixedDeltaTime) * MaxAngularSpeed;
+
+                if (Mathf.Abs(rotation) > 2f * MaxAngularSpeed * Time.fixedDeltaTime)
+                {
+                    //steer = rotation / (2f * maxAcceleration * Time.fixedDeltaTime); // not use
+                    //steer = rotation / 90f; // simple diviede on quarter                    
+                    steer = Mathf.Cos((90f - Mathf.Clamp(rotation, -90f, 90f)) * Mathf.Deg2Rad); // lateral component of directional vector
+                }
+                else // for precision rotation
+                {
+                    steer = rotation / MaxAngularSpeed;
+                }
+                steer = Mathf.Clamp(steer, -1f, 1f);
+
+                var targetVelocity = steer * MaxAngularSpeed;
+                torque = GetTorqueByTargetSpeed(targetVelocity, maxAcceleration);
+                //torque = GetTorque(steer, maxAcceleration * Mathf.Deg2Rad);
+            }
+            SetTorque(torque);
+        }
+
+        float GetTorqueByTargetSpeed(float targetVelocity, float maxAcceleration)
+        {            
+            var deltaVelocity = targetVelocity - AngularVelocity;
+            var acceleration = deltaVelocity / Time.fixedDeltaTime;
+            acceleration = Mathf.Clamp(acceleration, -maxAcceleration, maxAcceleration);
+
+            var throttle = acceleration / maxAcceleration;
             acceleration = acceleration * FuelSystem.GetFuelFlowRatio(FuelConsuption * Mathf.Abs(throttle) * Time.fixedDeltaTime);
             var torque = acceleration * Mathf.Deg2Rad * Inertia;
-            SetTorque(torque);
-            if (Mathf.Abs(acceleration) > _acceleration) _acceleration = acceleration;
+            return torque;
+        }
+
+        float GetTorque(float x, float maxAcceleration)
+        {
+            var damp = maxAcceleration / (Mathf.Deg2Rad * MaxAngularSpeed);
+            var acceleration = maxAcceleration * x - (Mathf.Deg2Rad * AngularVelocity) * damp;
+            acceleration = Mathf.Clamp(acceleration, -maxAcceleration, maxAcceleration);
+            
+            var throttle = acceleration / maxAcceleration;
+            acceleration = acceleration * FuelSystem.GetFuelFlowRatio(FuelConsuption * Mathf.Abs(throttle) * Time.fixedDeltaTime);
+            var torque = acceleration * Inertia;
+            return torque;
         }
 
         public void SetTorque(float torque)

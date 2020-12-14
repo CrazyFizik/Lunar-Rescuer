@@ -204,13 +204,7 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
             var rotation = Quaternion.FromToRotation(Vector2.right, direction);
             _inheritedPosition = _muzzlePoint.transform.position;
             _inheritedVelocity = Ship.Body.GetPointVelocity(_muzzlePoint.transform.position);
-            var p = _projectile.Spawn((Vector2)_muzzlePoint.position, rotation, _inheritedVelocity, _speedModifier, _damageModifier);
-            p._owner = Ship.gameObject;
-            var colliders = Ship.Body.GetComponentsInChildren<Collider2D>();
-            foreach (var collider in colliders)
-            {
-                Physics2D.IgnoreCollision(p._collider, collider);
-            }
+            var p = _projectile.Spawn((Vector2)_muzzlePoint.position, rotation, _inheritedVelocity, _speedModifier, _damageModifier, _owner.gameObject);
         }
 
         public override void TakeDamage()

@@ -308,7 +308,9 @@ MonoBehaviour:
   _collider: {fileID: 0}
   _owner: {fileID: 0}
   _hitFx: {fileID: 52183936173338408, guid: e1a1ae86c8c141644b63b938a56f51a8, type: 3}
+  _mask: 10
   _damage: 10
-  _speed: 15
+  _speed: 25
   _lifetime: 10
   _delay: 0.1
+  _pause: 1

@@ -8,8 +8,8 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
         [SerializeField] string _name = "Turret";
         [SerializeField] string _type = "TRT";
         [SerializeField] SystemState _state = new SystemState();
-        [SerializeField] float _turnRate = 180f;
-        [SerializeField] float _turnRateDamaged = 90f;
+        [SerializeField] float _turnRate = 360f;
+        [SerializeField] float _turnRateDamaged = 270f;
 
         private Ship _ship;
 
@@ -76,9 +76,8 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
         public void RotateTo(Vector2 target, float turnRate, float dt)
         {
             var direction = target - (Vector2)transform.position;
-            var forward = Vector2.right;
-            var angle = Vector2.SignedAngle(forward, direction);
-            Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            var absoluteAngle = Vector2.SignedAngle(Vector2.right, direction);
+            Quaternion rotation = Quaternion.Euler(new Vector3(0, 0, absoluteAngle));
             transform.rotation = Quaternion.RotateTowards(transform.rotation, rotation, turnRate * dt);
         }
 

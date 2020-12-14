@@ -20,13 +20,16 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
 
         [SerializeField] ExplosionFX _hitFx;
 
+        [SerializeField] int _mask = 8;
         [SerializeField] float _damage = 10;
         [SerializeField] float _speed = 10f;        
         [SerializeField] float _lifetime = 10f;
         [SerializeField] float _delay = .1f;
+        [SerializeField] bool _pause = true;
 
         private Vector3 _lastVelocity;
         private Vector3 _lastPosition;
+        private float _lastAngularVelocity;
 
         //public
 
@@ -35,6 +38,11 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
             _rb2d = GetComponent<Rigidbody2D>();
             _trail = GetComponent<LineRenderer>();
             _collider = GetComponent<Collider2D>();
+            _lastPosition = _rb2d.position;
+            _lastVelocity = _rb2d.velocity;
+            _lastAngularVelocity = _rb2d.angularVelocity;
+            gameObject.layer = _mask;
+            Physics2D.IgnoreLayerCollision(_mask, _mask, true);
         }
 
         private void Update()
@@ -42,8 +50,29 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
             _lifetime -= Time.deltaTime;
             _delay -= Time.deltaTime;
 
-            if (_delay <=0) this._collider.enabled = true;
-            if (_lifetime <= 0) Despawn();
+
+            if (_lifetime <= 0)
+            {
+                Despawn();
+                return;
+            }
+
+            if (_pause & _delay <= 0 & _owner != null)
+            {
+                var colliders = _owner.GetComponentsInChildren<Collider2D>();
+                foreach (var collider in colliders)
+                {
+                    Physics2D.IgnoreCollision(_collider, collider, false);
+                }
+                _pause = false;
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            _lastPosition = _rb2d.position;
+            _lastVelocity = _rb2d.velocity;
+            _lastAngularVelocity = _rb2d.angularVelocity;
         }
 
         public Pool<Projectile> GetPool()
@@ -63,24 +92,29 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
             return this._speed;
         }
 
-        public Projectile Spawn(Vector3 position, Quaternion rotation, Vector3 inheritedVelocity, float speedModifier = 1f, float damageModifier = 1f)
+        public Projectile Spawn(Vector3 position, Quaternion rotation, Vector3 inheritedVelocity, float speedModifier = 1f, float damageModifier = 1f, GameObject owner = null)
         {
             Projectile projectile = this.Spawn(position, rotation);
             projectile._lifetime = this._lifetime;
             projectile._delay = this._delay;
-            if (projectile._delay > 0.0f)
+            if (projectile._delay > 0.0f & owner != null)
             {
+                projectile._owner = owner;
+                projectile._pause = true;
+                projectile._collider.enabled = true;
                 if (projectile._collider != null)
                 {
-                    projectile._collider.enabled = false;
+                    var colliders = projectile._owner.GetComponentsInChildren<Collider2D>();
+                    foreach (var collider in colliders)
+                    {
+                        Physics2D.IgnoreCollision(projectile._collider, collider, true);
+                    }
                 }
             }
             else
             {
-                if (projectile._collider != null)
-                {
-                    projectile._collider.enabled = true;
-                }
+                projectile._collider.enabled = true;
+                projectile._pause = false;
             }
 
             if (speedModifier <= 0) speedModifier = 1f;
@@ -109,7 +143,7 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
         {
             if (this._hitFx != null)
             {
-                this._hitFx.Spawn(transform.position, transform.rotation, _rb2d.velocity);
+                this._hitFx.Spawn(transform.position, transform.rotation, _lastVelocity);
             }
 
             this.gameObject.SetActive(false);
@@ -141,29 +175,11 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
         //    this.CollisionDamage(collisionData);
         //}
 
-        [System.Obsolete("Need adapt for tiles")]
         private void CollisionDamage(Collision2D collisionData)
         {
             if (!this.GetPool().IsSpawned()) return;
             if (collisionData.contacts == null) return;
             if (collisionData.contactCount < 1) return;   
-            
-            if (_owner == collisionData.gameObject)
-            {
-                Physics2D.IgnoreCollision(_collider, collisionData.collider);
-                return;
-            }
-
-            var bullet = collisionData.gameObject.GetComponent<Projectile>();
-            if (bullet != null)
-            {
-                if (bullet._owner == _owner)
-                {
-                    Physics2D.IgnoreCollision(_collider, collisionData.collider);
-                    _collider.enabled = false;
-                    return;
-                }
-            }
 
             var point = collisionData.contacts[0].point;
             var normal = collisionData.contacts[0].normal;
@@ -173,11 +189,14 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
             if (collisionData.rigidbody != null)
             {
                 damagable = collisionData.rigidbody.gameObject.GetComponent<IDamageReciver>();
-                _rb2d.velocity = collisionData.rigidbody.velocity;
+                _rb2d.velocity = _lastVelocity = collisionData.rigidbody.velocity;
             }
-            if (damagable != null) damagable.Hit(_damage);
-
-            
+            if (damagable != null)
+            {
+                _rb2d.velocity = _lastVelocity = Vector3.zero;
+                damagable.Hit(_damage);
+            }
+                        
             this.Despawn();
         }
     }

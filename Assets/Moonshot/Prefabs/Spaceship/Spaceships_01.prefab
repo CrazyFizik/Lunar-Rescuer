@@ -255,7 +255,6 @@ MonoBehaviour:
   _fuelConsuption: 0.5
   _damagedAngularSpeed: 360
   _damagedFuelConsuption: 1
-  _acceleration: 0
 --- !u!114 &7719610144481798405
 MonoBehaviour:
   m_ObjectHideFlags: 0

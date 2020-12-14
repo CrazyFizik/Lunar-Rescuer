@@ -224,7 +224,6 @@ MonoBehaviour:
   _fuelConsuption: 1
   _damagedAngularSpeed: 60
   _damagedFuelConsuption: 2
-  _acceleration: 0
 --- !u!114 &8209139639126766821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,8 +466,8 @@ MonoBehaviour:
     _offlineRecoverTime: 8
     _offlineExtraTime: 4
     _timer: 0
-  _turnRate: 270
-  _turnRateDamaged: 180
+  _turnRate: 360
+  _turnRateDamaged: 270
 --- !u!1 &8209139639835360988
 GameObject:
   m_ObjectHideFlags: 0

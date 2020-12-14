@@ -13,7 +13,7 @@ namespace Assets.Moonshot.Scripts.Controllers
         public float _catchTime = 0.25f;
         public Controls _controls = new Controls();
         
-        public float _turnRate = 30f;
+        public float _turnRate = 90f;
         public float _rotationSensetivity = 0.25f;
         float _rotationVelocity;
 

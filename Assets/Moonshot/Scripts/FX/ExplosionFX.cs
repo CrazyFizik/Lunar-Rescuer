@@ -37,8 +37,9 @@ namespace Assets.Moonshot.Scripts.FX
 
         public ExplosionFX Spawn(Vector3 position, Quaternion rotation,  Vector3 inheritedVelocity)
         {
-            _velocity = inheritedVelocity;
-            return Spawn(position, rotation);
+            var fx = Spawn(position, rotation);
+            fx._velocity = inheritedVelocity;
+            return fx;
         }
 
         public ExplosionFX Spawn(Vector3 position, Quaternion rotation)
