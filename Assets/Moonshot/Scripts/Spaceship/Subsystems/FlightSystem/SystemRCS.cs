@@ -163,14 +163,23 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
                 //maxAcceleration = Mathf.Sqrt(1f / Time.fixedDeltaTime) * MaxAngularSpeed;
                 //maxAcceleration = 20f * Mathf.Log10(1f / Time.fixedDeltaTime / 20f) * MaxAngularSpeed;
 
-                //steer = rotation / (maxAcceleration * Time.fixedDeltaTime); // 
-                //steer = rotation / 90f; // simple diviede on quarter                    
-                //steer = Mathf.Cos((90f - Mathf.Clamp(rotation, -90f, 90f)) * Mathf.Deg2Rad); // lateral component of directional vector
-                //steer = rotation / Time.fixedDeltaTime; steer = steer / MaxAngularSpeed; // overshooting
-                ////steer = Mathf.Clamp(steer, -1f, 1f);
+                steer = rotation / (maxAcceleration * Time.fixedDeltaTime); // Good: simple divide by minimal angle
+                steer = Mathf.Clamp(steer, -1f, 1f);
 
-                steer = rotation / MaxAngularSpeed;
-                steer = Mathf.Sign(steer) * Utils.MathHelper.SmootherStep(0f, 90f/MaxAngularSpeed, Mathf.Abs(steer));
+                //steer = rotation / 90f; //Good: simple divide by quarter    
+                //steer = Mathf.Clamp(steer, -1f, 1f);
+
+                //steer = Mathf.Cos((90f - Mathf.Clamp(rotation, -90f, 90f)) * Mathf.Deg2Rad); //Good: lateral component of directional vector
+                //steer = Mathf.Clamp(steer, -1f, 1f);
+
+                //steer = rotation / Time.fixedDeltaTime; steer = steer / MaxAngularSpeed; //Bad: overshooting
+                //steer = Mathf.Clamp(steer, -1f, 1f);
+
+                //steer = 1f - Mathf.Cos(rotation * Mathf.Deg2Rad); // Bad: slow zero
+                //steer = Mathf.Sign(rotation) * Mathf.Clamp01(steer);
+
+                //steer = rotation / MaxAngularSpeed;
+                //steer = Mathf.Sign(steer) * Utils.MathHelper.SmootherStep(0f, 90f / MaxAngularSpeed, Mathf.Abs(steer)); // Bad: slow zero
 
                 var targetVelocity = steer * MaxAngularSpeed;
                 torque = GetTorqueByTargetSpeed(targetVelocity, maxAcceleration);
@@ -204,8 +213,15 @@ namespace Assets.Moonshot.Scripts.Spaceship.Subsystems
         }
 
         public void SetTorque(float torque)
-        {
-            Body.AddTorque(torque);
+        {            
+            if (Mathf.Abs(Body.angularVelocity) < 0.001f)
+            {
+                Body.angularVelocity = 0f;
+            }
+            else
+            {
+                Body.AddTorque(torque);
+            }
         }
 
         public override void TakeDamage()
